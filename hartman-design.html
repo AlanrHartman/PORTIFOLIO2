@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hartman Design — Identidade Visual & Experiência Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#080808;--surface:#111;--border:#1e1e1e;--border-lt:#2a2a2a;
+  --white:#f5f5f3;--muted:#888;
+  --accent:#3b82f6;--accent-dim:#1d4ed8;--accent-glow:rgba(59,130,246,.18);
+  --display:'Jost',sans-serif;--sans:'Nunito Sans',sans-serif;
+  --radius:12px;--ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent);color:#fff;}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border-lt);border-radius:2px;}
+
+/* CURSOR */
+.cursor{position:fixed;top:0;left:0;z-index:9999;width:10px;height:10px;border-radius:50%;background:var(--accent);pointer-events:none;mix-blend-mode:screen;will-change:transform;}
+.cursor-ring{position:fixed;top:0;left:0;z-index:9998;width:36px;height:36px;border-radius:50%;border:1px solid rgba(59,130,246,.5);pointer-events:none;will-change:transform;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);height:64px;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(8,8,8,.85);border-bottom:1px solid var(--border);transition:border-color .4s;}
+.nav-logo{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;}
+.nav-logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;transition:color .22s;}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{font-size:.78rem;font-weight:600;padding:.45rem 1.1rem;background:var(--accent);color:#fff;border-radius:6px;letter-spacing:.04em;transition:background .22s,box-shadow .22s;}
+.nav-cta:hover{background:var(--accent-dim);box-shadow:0 0 20px var(--accent-glow);}
+.nav-mobile-toggle{display:none;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger-line{display:block;width:22px;height:1.5px;background:var(--white);margin:5px 0;transition:transform .3s,opacity .3s;}
+
+/* HERO */
+#hero{position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9rem clamp(1.5rem,6vw,5rem) 6rem;}
+.hero-grid-bg{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 0%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 0%,transparent 100%);}
+.hero-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(59,130,246,.12) 0%,transparent 70%);pointer-events:none;z-index:0;animation:floatGlow 8s ease-in-out infinite;}
+@keyframes floatGlow{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-30px);}}
+.hero-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.6rem;animation:fadeUp .8s var(--ease) .1s both;}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent);}
+.hero-headline{position:relative;z-index:1;font-family:var(--display);font-size:clamp(2.8rem,7vw,6.5rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:900px;animation:fadeUp .9s var(--ease) .25s both;}
+.hero-headline em{font-style:italic;font-weight:200;color:var(--accent);letter-spacing:.01em;}
+.hero-sub{position:relative;z-index:1;font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:300;color:var(--muted);max-width:520px;margin-top:1.4rem;line-height:1.75;animation:fadeUp .9s var(--ease) .4s both;}
+.hero-actions{position:relative;z-index:1;display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem;animation:fadeUp .9s var(--ease) .55s both;}
+.hero-stats{position:relative;z-index:1;display:flex;gap:3rem;flex-wrap:wrap;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp .9s var(--ease) .7s both;}
+.stat-number{font-family:var(--display);font-size:2rem;font-weight:700;letter-spacing:-.02em;}
+.stat-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* BOTÕES */
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;border-radius:8px;background:var(--accent);color:#fff;font-family:var(--display);font-weight:600;font-size:.88rem;letter-spacing:.04em;transition:background .22s,box-shadow .22s,transform .18s;}
+.btn-primary:hover{background:var(--accent-dim);box-shadow:0 0 30px var(--accent-glow);transform:translateY(-1px);}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;border-radius:8px;border:1px solid var(--border-lt);color:var(--white);font-family:var(--display);font-weight:500;font-size:.88rem;letter-spacing:.04em;transition:border-color .22s,background .22s,transform .18s;}
+.btn-ghost:hover{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.06);transform:translateY(-1px);}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;background:var(--surface);}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker 30s linear infinite;}
+.ticker-item{display:inline-flex;align-items:center;gap:1.2rem;padding:0 2.5rem;font-family:var(--display);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.ticker-item .sep{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(22px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.r.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* SEÇÕES */
+section{padding:clamp(5rem,10vw,9rem) clamp(1.5rem,6vw,5rem);}
+.section-label{display:inline-flex;align-items:center;gap:.6rem;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;}
+.section-label::before{content:'';display:block;width:16px;height:1px;background:var(--accent);}
+.section-title{font-family:var(--display);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;max-width:760px;}
+.section-title em{font-style:italic;font-weight:200;color:var(--muted);}
+
+/* SOBRE */
+#about{border-top:1px solid var(--border);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem;}
+.about-image-wrap{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--border);}
+.about-image-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.08) 0%,transparent 60%);}
+.about-image-wrap img{filter:grayscale(15%) contrast(1.05);}
+.about-badge{position:absolute;bottom:1.5rem;left:1.5rem;z-index:2;background:rgba(8,8,8,.88);border:1px solid var(--border-lt);backdrop-filter:blur(12px);padding:.6rem 1rem;border-radius:8px;font-size:.78rem;display:flex;align-items:center;gap:.5rem;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 6px #22c55e;}
+.about-text{padding-top:.5rem;}
+.about-text p{font-size:1rem;color:rgba(245,245,243,.72);line-height:1.8;margin-bottom:1.4rem;font-weight:300;}
+.about-text p strong{color:var(--white);font-weight:500;}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem;}
+.tag{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .8rem;border-radius:4px;background:var(--surface);border:1px solid var(--border-lt);color:var(--muted);transition:border-color .2s,color .2s;}
+.tag:hover{border-color:var(--accent);color:var(--white);}
+
+/* SERVIÇOS */
+#services{border-top:1px solid var(--border);background:var(--surface);}
+.services-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:2rem;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.service-card{background:var(--surface);padding:2.2rem;position:relative;overflow:hidden;transition:background .3s;}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.service-card:hover{background:#161616;}
+.service-card:hover::before{transform:scaleX(1);}
+.service-icon{width:40px;height:40px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.1rem;transition:background .3s,box-shadow .3s;}
+.service-card:hover .service-icon{background:rgba(59,130,246,.2);box-shadow:0 0 16px var(--accent-glow);}
+.service-name{font-family:var(--display);font-size:1rem;font-weight:600;margin-bottom:.6rem;letter-spacing:-.01em;}
+.service-desc{font-size:.86rem;color:var(--muted);line-height:1.65;}
+.service-arrow{display:inline-flex;margin-top:1.2rem;color:var(--accent);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;gap:.3rem;align-items:center;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s;}
+.service-card:hover .service-arrow{opacity:1;transform:translateX(0);}
+
+/* PORTFÓLIO */
+#portfolio{border-top:1px solid var(--border);}
+.portfolio-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:2rem;}
+.portfolio-filter{display:flex;gap:.5rem;flex-wrap:wrap;}
+.filter-btn{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .9rem;border-radius:6px;border:1px solid var(--border-lt);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+.portfolio-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;}
+.proj{grid-column:span 4;}.proj.wide{grid-column:span 8;}.proj.tall{grid-row:span 2;}
+.proj-inner{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--border);cursor:pointer;height:100%;transition:border-color .3s,transform .4s var(--ease),box-shadow .4s;}
+.proj-inner:hover{border-color:rgba(59,130,246,.4);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.proj-img{aspect-ratio:3/2;overflow:hidden;}
+.proj.tall .proj-img{aspect-ratio:3/4;}.proj.wide .proj-img{aspect-ratio:16/7;}
+.proj-img img{transition:transform .8s var(--ease),filter .4s;filter:grayscale(10%);}
+.proj-inner:hover .proj-img img{transform:scale(1.06);filter:grayscale(0%);}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,transparent 55%);opacity:0;transition:opacity .35s;}
+.proj-inner:hover .proj-overlay{opacity:1;}
+.proj-info{padding:1.2rem 1.4rem;}
+.proj-cat{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem;}
+.proj-title{font-family:var(--display);font-size:.98rem;font-weight:600;letter-spacing:-.01em;margin-bottom:.3rem;}
+.proj-desc{font-size:.82rem;color:var(--muted);line-height:1.55;}
+.proj-link{position:absolute;bottom:1.2rem;right:1.2rem;width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:opacity .3s,transform .3s var(--ease);}
+.proj-inner:hover .proj-link{opacity:1;transform:scale(1);}
+
+/* PROCESSO */
+#process{border-top:1px solid var(--border);background:var(--surface);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:3.5rem;}
+.process-step{background:var(--surface);padding:2.5rem 2rem;transition:background .3s;}
+.process-step:hover{background:#161616;}
+.step-num{font-family:var(--display);font-size:4rem;font-weight:700;color:var(--border-lt);letter-spacing:-.04em;line-height:1;margin-bottom:1.4rem;transition:color .3s;}
+.process-step:hover .step-num{color:rgba(59,130,246,.15);}
+.step-title{font-family:var(--display);font-size:1rem;font-weight:600;margin-bottom:.7rem;letter-spacing:-.01em;}
+.step-desc{font-size:.86rem;color:var(--muted);line-height:1.65;}
+
+/* DEPOIMENTOS */
+#testimonials{border-top:1px solid var(--border);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:border-color .3s,transform .3s;}
+.testi-card:hover{border-color:rgba(59,130,246,.35);transform:translateY(-3px);}
+.testi-quote{font-style:italic;font-size:.98rem;font-weight:200;line-height:1.75;color:rgba(245,245,243,.75);margin-bottom:1.4rem;}
+.testi-author{display:flex;align-items:center;gap:.8rem;}
+.testi-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--accent-dim),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:.75rem;color:#fff;}
+.testi-name{font-family:var(--display);font-size:.85rem;font-weight:600;}
+.testi-role{font-size:.74rem;color:var(--muted);}
+.stars{color:var(--accent);font-size:.9rem;margin-bottom:1rem;letter-spacing:.1em;}
+
+/* CTA */
+#cta{border-top:1px solid var(--border);text-align:center;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(59,130,246,.12) 0%,transparent 70%);pointer-events:none;}
+#cta .section-label{justify-content:center;}
+#cta .section-label::before{display:none;}
+.cta-title{font-family:var(--display);font-size:clamp(2.4rem,5.5vw,5rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;max-width:800px;margin:0 auto;position:relative;z-index:1;}
+.cta-title em{font-style:italic;font-weight:200;color:var(--accent);}
+.cta-sub{font-size:1rem;color:var(--muted);margin:1.4rem auto 0;max-width:440px;line-height:1.75;font-weight:300;position:relative;z-index:1;}
+.cta-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2.5rem;position:relative;z-index:1;}
+.cta-email{display:flex;align-items:center;gap:.7rem;margin-top:2rem;justify-content:center;font-size:.84rem;color:var(--muted);position:relative;z-index:1;}
+.cta-email a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s;}
+.cta-email a:hover{border-color:var(--accent);}
+
+/* RODAPÉ */
+footer{border-top:1px solid var(--border);padding:3rem clamp(1.5rem,6vw,5rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.footer-brand{font-family:var(--display);font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:.5rem;letter-spacing:.06em;text-transform:uppercase;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:500;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-socials{display:flex;gap:.75rem;}
+.social-link{width:34px;height:34px;border-radius:8px;border:1px solid var(--border-lt);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:border-color .2s,color .2s,background .2s;}
+.social-link:hover{border-color:var(--accent);color:var(--white);background:rgba(59,130,246,.1);}
+.footer-copy{font-size:.7rem;color:var(--muted);letter-spacing:.04em;}
+
+/* MOBILE */
+@media(max-width:767px){
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:block;}
+  nav.mobile-open .nav-links{display:flex;flex-direction:column;position:fixed;inset:64px 0 0 0;background:var(--bg);padding:2rem;gap:1.5rem;align-items:center;border-top:1px solid var(--border);z-index:99;}
+  nav.mobile-open .nav-links a{font-size:1.1rem;}
+  .about-grid,.testi-grid{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  .proj,.proj.wide,.proj.tall{grid-column:span 1;}
+  .proj.wide .proj-img,.proj.tall .proj-img{aspect-ratio:3/2;}
+  .process-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;align-items:flex-start;}
+  .hero-stats{gap:2rem;}
+  .services-header,.portfolio-header{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:480px){.process-grid{grid-template-columns:1fr;}}
+@media(min-width:768px) and (max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .portfolio-grid{grid-template-columns:repeat(6,1fr);}
+  .proj{grid-column:span 3;}.proj.wide{grid-column:span 6;}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo"><span class="nav-logo-dot"></span>Hartman Design</div>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#portfolio">Trabalhos</a></li>
+    <li><a href="#process">Processo</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Iniciar Projeto</a>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <span class="hero-eyebrow">Disponível para novos projetos</span>
+  <h1 class="hero-headline">Design que<br><em>comunica.</em><br>Interfaces que convertem.</h1>
+  <p class="hero-sub">Crio identidades visuais, experiências digitais e interfaces modernas que conectam marcas a pessoas — com precisão, intenção e clareza.</p>
+  <div class="hero-actions">
+    <a href="#portfolio" class="btn-primary">Ver Portfólio <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="#cta" class="btn-ghost">Fale Comigo</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-number">7+</div><div class="stat-label">Anos em Design</div></div>
+    <div><div class="stat-number">60+</div><div class="stat-label">Projetos Entregues</div></div>
+    <div><div class="stat-number">5</div><div class="stat-label">Competências Centrais</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Identidade Visual <span class="sep"></span></span>
+    <span class="ticker-item">UI/UX Design <span class="sep"></span></span>
+    <span class="ticker-item">Branding Estratégico <span class="sep"></span></span>
+    <span class="ticker-item">Produção Gráfica <span class="sep"></span></span>
+    <span class="ticker-item">Desenvolvimento Front-end <span class="sep"></span></span>
+    <span class="ticker-item">Motion & Interação <span class="sep"></span></span>
+    <span class="ticker-item">Direção Criativa <span class="sep"></span></span>
+    <span class="ticker-item">Landing Pages <span class="sep"></span></span>
+    <span class="ticker-item">Identidade Visual <span class="sep"></span></span>
+    <span class="ticker-item">UI/UX Design <span class="sep"></span></span>
+    <span class="ticker-item">Branding Estratégico <span class="sep"></span></span>
+    <span class="ticker-item">Produção Gráfica <span class="sep"></span></span>
+    <span class="ticker-item">Desenvolvimento Front-end <span class="sep"></span></span>
+    <span class="ticker-item">Motion & Interação <span class="sep"></span></span>
+    <span class="ticker-item">Direção Criativa <span class="sep"></span></span>
+    <span class="ticker-item">Landing Pages <span class="sep"></span></span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="about">
+  <span class="section-label r">Sobre Mim</span>
+  <div class="about-grid">
+    <div class="about-image-wrap r d1">
+      <img src="/mnt/user-data/uploads/456465.png" alt="Alan Hartman" onerror="this.closest('.about-image-wrap').style.background='#161616'"/>
+      <div class="about-badge"><span class="badge-dot"></span>Aberto a colaborações</div>
+    </div>
+    <div class="about-text">
+      <h2 class="section-title r d1">Alan<br><em>Hartman</em></h2>
+      <div class="r d2">
+        <p>Sou um designer multidisciplinar com raízes em <strong>produção gráfica</strong> e foco crescente em design de produtos digitais. Minha trajetória começou no impresso — trabalhando com materiais reais, clientes reais e prazos reais.</p>
+        <p>Essa base moldou minha <strong>atenção obsessiva aos detalhes</strong>, precisão visual e compreensão profunda de como o design impacta a percepção humana e o comportamento.</p>
+        <p>Hoje, combino essa experiência com princípios modernos de <strong>UI/UX</strong> e habilidades de desenvolvimento front-end para criar experiências digitais que não são apenas bonitas — mas <strong>funcionais, intuitivas e focadas em conversão.</strong></p>
+      </div>
+      <div class="about-tags r d3">
+        <span class="tag">Photoshop</span><span class="tag">Illustrator</span><span class="tag">CorelDRAW</span>
+        <span class="tag">Canva</span><span class="tag">Figma</span><span class="tag">HTML/CSS</span>
+        <span class="tag">JavaScript</span><span class="tag">Produção Gráfica</span><span class="tag">Identidade de Marca</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <span class="section-label r">O Que Faço</span>
+      <h2 class="section-title r d1">Um ecossistema<br><em>criativo completo</em></h2>
+    </div>
+    <p class="r d2" style="color:var(--muted);max-width:340px;font-size:.9rem;line-height:1.75">Do primeiro conceito ao pixel final, cuido de todo o fluxo criativo e de produção digital.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card r"><div class="service-icon">🎨</div><div class="service-name">Design de Identidade Visual</div><p class="service-desc">Logotipos, sistemas tipográficos, paletas de cores e manuais de marca que definem como o seu negócio se apresenta — de forma consistente em todos os pontos de contato.</p><span class="service-arrow">Saiba mais ›</span></div>
+    <div class="service-card r d1"><div class="service-icon">📱</div><div class="service-name">Redes Sociais & Marketing</div><p class="service-desc">Criativos que param o scroll para feeds, stories e campanhas. Desenvolvidos para gerar engajamento e manter a consistência da marca.</p><span class="service-arrow">Saiba mais ›</span></div>
+    <div class="service-card r d2"><div class="service-icon">🖥️</div><div class="service-name">Design UI/UX</div><p class="service-desc">Wireframes, protótipos e interfaces pixel-perfect que colocam o usuário em primeiro lugar — fluxos intuitivos, hierarquia clara e micro-interações que encantam.</p><span class="service-arrow">Saiba mais ›</span></div>
+    <div class="service-card r d1"><div class="service-icon">🚀</div><div class="service-name">Landing Pages</div><p class="service-desc">Páginas de alta conversão projetadas e desenvolvidas para capturar atenção, comunicar valor e transformar visitantes em leads — com rapidez.</p><span class="service-arrow">Saiba mais ›</span></div>
+    <div class="service-card r d2"><div class="service-icon">⚡</div><div class="service-name">Desenvolvimento Front-end</div><p class="service-desc">HTML/CSS e JavaScript limpos e semânticos — traduzindo design em experiências web funcionais, performáticas e acessíveis sem compromissos.</p><span class="service-arrow">Saiba mais ›</span></div>
+    <div class="service-card r d3"><div class="service-icon">💡</div><div class="service-name">Direção Criativa</div><p class="service-desc">Visão estratégica para campanhas, lançamentos e ecossistemas de conteúdo. Criatividade alinhada a objetivos de negócio para produzir trabalhos que realmente significam algo.</p><span class="service-arrow">Saiba mais ›</span></div>
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <span class="section-label r">Trabalhos Selecionados</span>
+      <h2 class="section-title r d1">Projetos que<br><em>deixaram marca</em></h2>
+    </div>
+    <div class="portfolio-filter r d2">
+      <button class="filter-btn active">Todos</button>
+      <button class="filter-btn">Branding</button>
+      <button class="filter-btn">Redes Sociais</button>
+      <button class="filter-btn">Digital</button>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+    <div class="proj wide r"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/Gemini_Generated_Image_jzpdzfjzpdzfjzpd.png" alt="Missãozinha"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Redes Sociais · Eventos Paroquiais</div><div class="proj-title">Missãozinha com as Crianças</div><p class="proj-desc">Cartaz de evento ilustrado para a Paróquia Santa Rita — linguagem visual vibrante e infantil que impulsiona a participação da comunidade.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj tall r d1"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/QUARESMA_2026.png" alt="Quaresma"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Impressão · Identidade de Marca</div><div class="proj-title">Quaresma 2026</div><p class="proj-desc">Identidade de evento em roxo profundo para o período da Quaresma — iluminação dramática, tipografia forte, tom devocional.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r d2"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/1.png" alt="Semana Santa"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Digital · Campanha</div><div class="proj-title">Semana Santa 2026</div><p class="proj-desc">Cartaz minimalista para a Semana Santa — fotografia monocromática, layout tipográfico preciso, tom premium.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/55.png" alt="Terça Feira Santa"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Evento · Editorial</div><div class="proj-title">Terça Feira Santa</div><p class="proj-desc">Flyer de evento ilustrado com cenário cinematográfico e hierarquia tipográfica clara nas informações.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r d1"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/66.png" alt="Quarta Feira Santa"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Evento · Ilustração</div><div class="proj-title">Quarta Feira Santa</div><p class="proj-desc">Cartaz devocional estilo arte a lápis com profundidade atmosférica e layout informacional controlado.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj wide r d2"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/Gemini_Generated_Image_1z1pb61z1pb61z1p-Photoroom.png" alt="Mangalarga"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Vestuário · Branding</div><div class="proj-title">Mangalarga Marchador — CTE J2</div><p class="proj-desc">Design de camisa em sublimação personalizada para clube de equitação — paleta terrosa, iconografia forte, orgulho cultural.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/celebração.png" alt="São José"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Impressão · Evento</div><div class="proj-title">Tríduo de São José</div><p class="proj-desc">Cartaz de evento detalhado mesclando estilos fotorrealista e ilustrado com tipografia rústica e acolhedora.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r d1"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/Cópia_de_segurança_de_Recuperado_EVANGELHO_2.png" alt="Evangelho"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Redes Sociais · Design de Conteúdo</div><div class="proj-title">Evangelho do Dia</div><p class="proj-desc">Sistema de template diário para evangelhos nas redes — composição editorial com estética atemporal em pergaminho.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+    <div class="proj r d2"><div class="proj-inner"><div class="proj-img"><img src="/mnt/user-data/uploads/99.png" alt="Páscoa"/></div><div class="proj-overlay"></div><div class="proj-info"><div class="proj-cat">Campanha · Impressão</div><div class="proj-title">Domingo de Páscoa</div><p class="proj-desc">Cartaz completo de programação para o Domingo de Páscoa — paleta cinematográfica suave com narrativa visual forte e layout de agenda claro.</p></div><div class="proj-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="process">
+  <span class="section-label r">Como Trabalho</span>
+  <h2 class="section-title r d1">Do primeiro briefing<br><em>ao pixel final</em></h2>
+  <div class="process-grid">
+    <div class="process-step r"><div class="step-num">01</div><div class="step-title">Entendendo o Problema</div><p class="step-desc">Todo grande design começa com as perguntas certas. Mergulho fundo nos seus objetivos de negócio, no seu público e no contexto competitivo antes de abrir qualquer ferramenta.</p></div>
+    <div class="process-step r d1"><div class="step-num">02</div><div class="step-title">Pesquisa & Estratégia</div><p class="step-desc">Design embasado supera acidentes bonitos. Pesquiso posicionamento de mercado, tendências visuais e comportamento do usuário para fundamentar cada decisão criativa em propósito.</p></div>
+    <div class="process-step r d2"><div class="step-num">03</div><div class="step-title">Design & Iteração</div><p class="step-desc">Exploro amplamente, depois foco com precisão. Múltiplos conceitos, ciclos de feedback honestos e refinamentos precisos até que o trabalho pareça inevitável — não arbitrário.</p></div>
+    <div class="process-step r d3"><div class="step-num">04</div><div class="step-title">Entrega & Refinamento</div><p class="step-desc">Arquivos prontos para produção, código limpo e o conhecimento para utilizá-los. Não desapareço na entrega — garanto que o trabalho prospere no mundo real.</p></div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="testimonials">
+  <span class="section-label r">Confiança & Feedback</span>
+  <h2 class="section-title r d1">O que as pessoas<br><em>estão dizendo</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card r"><div class="stars">★★★★★</div><p class="testi-quote">"Alan tem um olhar incrível para a comunicação visual. Cada cartaz que ele criou para os eventos da nossa paróquia ficou exatamente certo — profissional, acolhedor e inconfundivelmente dentro da nossa identidade."</p><div class="testi-author"><div class="testi-avatar">PM</div><div><div class="testi-name">Pe. Milton</div><div class="testi-role">Pároco, Santa Rita — Nova Resende</div></div></div></div>
+    <div class="testi-card r d1"><div class="stars">★★★★★</div><p class="testi-quote">"O design da camisa do Mangalarga Marchador impressionou todo mundo na competição. Os detalhes, o equilíbrio das cores — tudo ficou exatamente como imaginávamos. Melhor, na verdade."</p><div class="testi-author"><div class="testi-avatar">JG</div><div><div class="testi-name">João Gabriel</div><div class="testi-role">Fundador, Clube Equestre CTE J2</div></div></div></div>
+    <div class="testi-card r d2"><div class="stars">★★★★★</div><p class="testi-quote">"Trabalhar com o Alan significa comunicação clara, prazos cumpridos e designs que realmente funcionam — não só ficam bonitos na tela. Ele entende essa diferença."</p><div class="testi-author"><div class="testi-avatar">CL</div><div><div class="testi-name">Cliente, Comércio Local</div><div class="testi-role">Nova Resende, MG</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <span class="section-label r">Pronto Quando Você Estiver</span>
+  <h2 class="cta-title r d1">Vamos construir algo<br><em>significativo</em> juntos.</h2>
+  <p class="cta-sub r d2">Seja com um briefing claro ou uma ideia ainda crua — adoraria ouvir sobre o que você está construindo.</p>
+  <div class="cta-actions r d3">
+    <a href="mailto:alan@hartmandesign.com" class="btn-primary">Iniciar um Projeto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="#portfolio" class="btn-ghost">Ver Portfólio</a>
+  </div>
+  <p class="cta-email r d4">Ou fale diretamente comigo em <a href="mailto:alan@hartmandesign.com">alan@hartmandesign.com</a></p>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="footer-brand"><span class="nav-logo-dot"></span>Hartman Design</div>
+  <ul class="footer-links">
+    <li><a href="#about">Sobre</a></li><li><a href="#services">Serviços</a></li>
+    <li><a href="#portfolio">Trabalhos</a></li><li><a href="#process">Processo</a></li>
+    <li><a href="mailto:alan@hartmandesign.com">Contato</a></li>
+  </ul>
+  <div class="footer-socials">
+    <a href="#" class="social-link" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+    <a href="#" class="social-link" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="#" class="social-link" aria-label="Behance"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9.174 10.688c.394-.42.608-.968.608-1.638 0-1.694-1.212-2.55-3.128-2.55H2v11h4.886c1.994 0 3.516-.946 3.516-2.916 0-1.156-.506-2.044-1.228-2.508zM4 8.25h2.154c.924 0 1.518.334 1.518 1.174 0 .766-.484 1.246-1.518 1.246H4V8.25zm2.498 6.75H4v-2.688h2.568c1.048 0 1.612.46 1.612 1.32 0 .946-.656 1.368-1.682 1.368zM15.5 8h4v1H15.5zM18.026 9.75c-1.996 0-3.276 1.4-3.276 3.376 0 2.05 1.23 3.374 3.276 3.374 1.622 0 2.596-.814 3.04-1.974H19.06c-.248.526-.772.81-1.034.81-1.004 0-1.586-.638-1.586-1.636h5.56c.02-.248.02-.468.02-.468 0-2.29-1.256-3.482-3.994-3.482zm-1.56 2.678c.098-.884.71-1.51 1.56-1.51.912 0 1.466.6 1.516 1.51h-3.076z"/></svg></a>
+    <a href="#" class="social-link" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+  </div>
+  <span class="footer-copy">© 2026 Hartman Design. Todos os direitos reservados.</span>
+</footer>
+
+<script>
+(function(){
+  /* CURSOR */
+  var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  var mx=0,my=0,rx=0,ry=0;
+  if(window.innerWidth>767){
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+    (function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cur.style.transform='translate('+(mx-5)+'px,'+(my-5)+'px)';ring.style.transform='translate('+(rx-18)+'px,'+(ry-18)+'px)';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,.proj-inner').forEach(function(el){el.addEventListener('mouseenter',function(){ring.style.opacity='0';});el.addEventListener('mouseleave',function(){ring.style.opacity='1';});});
+  }else{cur.style.display='none';ring.style.display='none';}
+
+  /* REVEAL — baseado em getBoundingClientRect, sem IntersectionObserver */
+  var items=document.querySelectorAll('.r');
+  function checkReveal(){
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    for(var i=0;i<items.length;i++){
+      if(!items[i].classList.contains('on')){
+        var top=items[i].getBoundingClientRect().top;
+        if(top<vh-30){items[i].classList.add('on');}
+      }
+    }
+  }
+  /* Escuta scroll em todos os alvos possíveis */
+  window.addEventListener('scroll',checkReveal,true);
+  document.addEventListener('scroll',checkReveal,true);
+  /* Dispara em momentos chave */
+  checkReveal();
+  window.addEventListener('load',checkReveal);
+  setTimeout(checkReveal,100);
+  setTimeout(checkReveal,400);
+  setTimeout(checkReveal,800);
+  setTimeout(checkReveal,1500);
+  /* Último recurso: revela tudo após 2s */
+  setTimeout(function(){items.forEach(function(el){el.classList.add('on');});},2000);
+
+  /* NAV MOBILE */
+  document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('nav').classList.toggle('mobile-open');});
+  /* NAV SCROLL */
+  window.addEventListener('scroll',function(){document.getElementById('nav').style.borderBottomColor=window.scrollY>40?'var(--border-lt)':'var(--border)';},{passive:true});
+  /* FILTROS */
+  document.querySelectorAll('.filter-btn').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');});});
+})();
+</script>
+</body>
+</html>
